@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - WhitePlane
+  - BlackPlane
+  - Point
+  - Killer
   layers:
   - Default
   - TransparentFX

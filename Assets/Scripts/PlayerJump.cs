@@ -54,7 +54,7 @@ public class PlayerJump : MonoBehaviour
         if (isGrounded)
         {
             
-            hasParent = raycastHit.collider.CompareTag("Platform");
+            hasParent = raycastHit.collider.CompareTag("WhitePlane");
             if (hasParent)
             {
                 transform.SetParent(raycastHit.collider.transform);

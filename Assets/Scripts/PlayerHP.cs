@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private int maxHP = 3;
-    [SerializeField] private UIController uiController;
     private int currentHP;
-    
+    [SerializeField] private Rigidbody2D rb;
+    private Vector3 startPosition;
+
     private int CurrentHP
     {
         get
@@ -17,16 +18,31 @@ public class PlayerHP : MonoBehaviour
         set
         {
             currentHP = value;
-            uiController.SetCurrentHP(currentHP);
             if (currentHP <= 0)
             {
-                uiController.SetEndGame(false);
+                //uiController.SetEndGame(false);
+                Debug.Log("Lose");
             }
         }
     }
     private void Start()
     {
-        uiController.SetMaxHP(maxHP);
+        startPosition = transform.position;
         CurrentHP = maxHP;
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("BlackPlane") || other.CompareTag("Point"))
+        {
+            Die();
+        }
+    }
+    private void Die()
+    {
+        transform.position = startPosition;
+        rb.velocity = Vector2.zero;
+        CurrentHP--;
+    }
+
 }
