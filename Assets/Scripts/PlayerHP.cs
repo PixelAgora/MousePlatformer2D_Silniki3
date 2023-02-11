@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private int maxHP = 3;
@@ -11,10 +12,7 @@ public class PlayerHP : MonoBehaviour
 
     private int CurrentHP
     {
-        get
-        {
-            return currentHP;
-        }
+        get { return currentHP; }
         set
         {
             currentHP = value;
@@ -25,6 +23,7 @@ public class PlayerHP : MonoBehaviour
             }
         }
     }
+
     private void Start()
     {
         startPosition = transform.position;
@@ -33,16 +32,22 @@ public class PlayerHP : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Pickup pickup = other.GetComponent<Pickup>();
+        if (pickup != null) //true jeśli other zawiera Pickup, false jeśli go nie zawiera
+        {
+            CurrentHP += pickup.Collect();
+        }
+
         if (other.CompareTag("BlackPlane") || other.CompareTag("Point"))
         {
             Die();
         }
     }
+
     private void Die()
     {
         transform.position = startPosition;
         rb.velocity = Vector2.zero;
         CurrentHP--;
     }
-
 }
