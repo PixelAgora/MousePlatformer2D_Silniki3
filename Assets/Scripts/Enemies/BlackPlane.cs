@@ -11,7 +11,7 @@ public class BlackPlane : MonoBehaviour
     }
     private void Move()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position += Vector3.left * (speed * Time.deltaTime);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

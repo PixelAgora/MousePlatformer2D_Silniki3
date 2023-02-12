@@ -38,7 +38,7 @@ public class PlayerHP : MonoBehaviour
             CurrentHP += pickup.Collect();
         }
 
-        if (other.CompareTag("BlackPlane") || other.CompareTag("Point"))
+        if (other.CompareTag("BlackPlane") || other.CompareTag("Point") || other.CompareTag("Killer"))
         {
             Die();
         }
