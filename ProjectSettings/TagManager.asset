@@ -9,6 +9,8 @@ TagManager:
   - BlackPlane
   - Point
   - Killer
+  - Cable
+  - PlayerKiller
   layers:
   - Default
   - TransparentFX

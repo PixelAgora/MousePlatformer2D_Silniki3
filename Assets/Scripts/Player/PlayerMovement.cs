@@ -5,24 +5,40 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
-    private Vector2 startPosition;
-    private float inputX;
-
-
-    private void Start()
+    Rigidbody rb;
+    public Vector3 normalized;
+    [SerializeField] float walkSpeed = 3f;
+    [SerializeField] float runSpeed = 6f;
+    
+    // Start is called before the first frame update
+    void Start()
     {
-        startPosition = transform.position;
+
     }
 
-    private void FixedUpdate()
+    // Update is called once per frame
+    void Update()
     {
         Move();
     }
-
     private void Move()
     {
-        inputX = Input.GetAxis("Horizontal");
-        transform.position += inputX * Vector3.right * Time.deltaTime * moveSpeed;
+        Vector3 input = new Vector3
+        {
+            x = Input.GetAxis("Horizontal"),
+            y = 0f,
+            z = 0f,
+        };
+        input.Normalize();
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.position += input * Time.deltaTime * runSpeed;
+        }
+        else
+        {
+            transform.position += input * Time.deltaTime * walkSpeed;
+        }
+        
     }
 }
