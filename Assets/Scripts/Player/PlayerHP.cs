@@ -9,6 +9,7 @@ public class PlayerHP : MonoBehaviour
     private int currentHP;
     [SerializeField] private Rigidbody2D rb;
     private Vector3 startPosition;
+    [SerializeField] private UIController uiController;
 
     private int CurrentHP
     {
@@ -18,8 +19,7 @@ public class PlayerHP : MonoBehaviour
             currentHP = value;
             if (currentHP <= 0)
             {
-                //uiController.SetEndGame(false);
-                Debug.Log("Lose");
+                uiController.SetEndGame1(false);
             }
         }
     }
@@ -38,9 +38,13 @@ public class PlayerHP : MonoBehaviour
             CurrentHP += pickup.Collect();
         }
 
-        if (other.CompareTag("BlackPlane") || other.CompareTag("Point") || other.CompareTag("Killer"))
+        if (other.CompareTag("BlackPlane") || other.CompareTag("Point") || other.CompareTag("PlayerKiller"))
         {
             Die();
+        }
+        if (other.CompareTag("Cable"))
+        {
+            uiController.SetEndGame2(false);
         }
     }
 
